@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import { Geist, Geist_Mono } from "next/font/google";
 import { PointsCluster3D } from "@/components/points-cluster-3D/PointsCluster3D";
@@ -81,6 +82,18 @@ export default function Home() {
         className={`${geistSans.variable} ${geistMono.variable}`}
         style={homeStyles.container}
       >
+        <a
+          style={homeStyles.githubLink}
+          target="_blank"
+          href="https://github.com/Bux42/LeekWars-Statistics"
+        >
+          <img
+            alt="github"
+            height={32}
+            width={32}
+            src="https://cdn3.iconfinder.com/data/icons/social-media-2169/24/social_media_social_media_logo_github-512.png"
+          />
+        </a>
         <main style={homeStyles.main}>
           <h1 style={homeStyles.title}>
             Leekwars Statistics (last scrapped {lastScrappedDate}) on the top

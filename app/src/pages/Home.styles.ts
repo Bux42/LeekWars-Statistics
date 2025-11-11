@@ -13,6 +13,7 @@ export interface IHomeStyles {
   title: CSSProperties;
   subtitle: CSSProperties;
   label: CSSProperties;
+  githubLink: CSSProperties;
 }
 
 export const homeStyles: IHomeStyles = {
@@ -137,5 +138,10 @@ export const homeStyles: IHomeStyles = {
     textTransform: "uppercase" as const,
     letterSpacing: "0.5px",
     opacity: 0.95,
+  },
+  githubLink: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
 };
