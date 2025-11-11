@@ -28,4 +28,7 @@ export interface ScrappedLeek {
   ranking: number;
   in_garden: boolean;
   focused?: boolean;
+  weapon_count: number;
+  chip_count: number;
+  component_count: number;
 }

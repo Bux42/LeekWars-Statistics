@@ -23,6 +23,9 @@ export const NumberKeys: (keyof ScrappedLeek)[] = [
   "victories",
   "draws",
   "ratio",
+  "weapon_count",
+  "chip_count",
+  "component_count",
 ];
 
 export const PlotModeToAllowedKeys: Record<PlotMode, (keyof ScrappedLeek)[]> = {

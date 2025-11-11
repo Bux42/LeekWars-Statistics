@@ -15,7 +15,12 @@ import {
 import { COLOR_SCALES } from "@/constants/ColorScales.constants";
 import { PointsCluster2D } from "@/components/points-cluster-2D/PointsCluster2D";
 
-const all_leeks: ScrappedLeek[] = leeksData as ScrappedLeek[];
+const all_leeks: ScrappedLeek[] = (leeksData as ScrappedLeek[]).map((leek) => ({
+  ...leek,
+  weapon_count: leek.weapons ? leek.weapons.length : 0,
+  chip_count: leek.chips ? leek.chips.length : 0,
+  component_count: leek.components ? leek.components.length : 0,
+}));
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
