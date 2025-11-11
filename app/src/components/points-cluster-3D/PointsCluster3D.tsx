@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { PointsCluster3DProps } from "./PointsCluster3D.types";
 import { normalizeLog, findMin, findMax } from "@/utils/MathHelpers";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
@@ -9,6 +9,9 @@ export function PointsCluster3D(props: PointsCluster3DProps) {
   const { leeks, key1, key2, key3 } = props;
   const { width, height } = props;
   const { colorScale } = props;
+  const [cameraState, setCameraState] = useState<
+    Partial<Plotly.Camera> | undefined
+  >(undefined);
 
   const xData = leeks.map((leek) => leek[key1] as number);
   const yData = leeks.map((leek) => leek[key2] as number);
@@ -58,10 +61,18 @@ export function PointsCluster3D(props: PointsCluster3DProps) {
     }
   };
 
+  const handleRelayout = (event: Readonly<Plotly.PlotRelayoutEvent>) => {
+    const sceneCamera = (event as Record<string, unknown>)["scene.camera"];
+    if (sceneCamera) {
+      setCameraState(sceneCamera as Partial<Plotly.Camera>);
+    }
+  };
+
   return (
     <Plot
       style={{ width: width, height: height, background: "transparent" }}
       onClick={handlePlotClick}
+      onRelayout={handleRelayout}
       data={[
         {
           x: xData,
@@ -97,6 +108,7 @@ export function PointsCluster3D(props: PointsCluster3DProps) {
           xaxis: { title: { text: String(key1) } },
           yaxis: { title: { text: String(key2) } },
           zaxis: { title: { text: String(key3) } },
+          camera: cameraState,
         },
         showlegend: true,
         legend: {
