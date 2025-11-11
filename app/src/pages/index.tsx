@@ -7,7 +7,7 @@ import { ScrappedLeek } from "@/types/ScrappedLeek.types";
 import { getDateDeltaString } from "@/utils/DateHelpers";
 import { useEffect, useState } from "react";
 import { PlotWrapper } from "@/components/plot-wrapper/PlotWrapper";
-import { homeStyles } from "./Home.styles";
+import { homeStyles } from "@/styles/Home.styles";
 import {
   PlotMode,
   PlotModeToAllowedKeys,
