@@ -82,79 +82,112 @@ export default function Home() {
         style={homeStyles.container}
       >
         <main style={homeStyles.main}>
-          <h1 style={{ marginBlockStart: 0, marginBlockEnd: 0 }}>
+          <h1 style={homeStyles.title}>
             Leekwars Statistics (last scrapped {lastScrappedDate}) on the top
             5000 leeks
           </h1>
-          <p style={{ marginBlockStart: 0, marginBlockEnd: 0 }}>
-            Double / triple click node to open leek profile
+          <p style={homeStyles.subtitle}>
+            Double-click any point to open leek profile
           </p>
 
           <div style={homeStyles.topMenuContainer} className="topMenuContainer">
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <h2>Mode</h2>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <h3 style={homeStyles.label}>Mode</h3>
               <div
                 style={homeStyles.modeButtonsContainer}
                 className="modeButtonsContainer"
               >
                 <button
-                  style={homeStyles.modeButton}
+                  style={
+                    plotMode === "2D"
+                      ? homeStyles.modeButtonActive
+                      : homeStyles.modeButton
+                  }
                   onClick={() => onChangePlotMode("2D")}
                 >
                   2D
                 </button>
                 <button
-                  style={homeStyles.modeButton}
+                  style={
+                    plotMode === "3D"
+                      ? homeStyles.modeButtonActive
+                      : homeStyles.modeButton
+                  }
                   onClick={() => onChangePlotMode("3D")}
                 >
                   3D
                 </button>
               </div>
             </div>
-            <input
-              type="text"
-              id="name-search"
-              placeholder="Search leek name..."
-              value={nameSearchText}
-              onChange={(e) => setNameSearchText(e.target.value)}
-              style={homeStyles.searchInput}
-            />
-            <div style={{ display: "flex" }} className="keyDropdownsContainer">
-              <h2>X</h2>
-              <select
-                style={homeStyles.selectInput}
-                onChange={(e) => setKey1(e.target.value as keyof ScrappedLeek)}
+
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <h3 style={homeStyles.label}>Search</h3>
+              <input
+                type="text"
+                id="name-search"
+                placeholder="Search leek name..."
+                value={nameSearchText}
+                onChange={(e) => setNameSearchText(e.target.value)}
+                style={homeStyles.searchInput}
+              />
+            </div>
+
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "12px" }}
+              className="keyDropdownsContainer"
+            >
+              <h3 style={homeStyles.label}>Axes</h3>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
               >
-                {availableKeys
-                  .filter(
-                    (key) =>
-                      key !== key2 && (plotMode == "3D" ? key !== key3 : true)
-                  )
-                  .map((key) => (
-                    <option key={key} value={key} selected={key === key1}>
-                      {key}
-                    </option>
-                  ))}
-              </select>
-              <h2>Y</h2>
-              <select
-                style={homeStyles.selectInput}
-                onChange={(e) => setKey2(e.target.value as keyof ScrappedLeek)}
+                <span style={{ fontSize: "14px", fontWeight: "600" }}>X:</span>
+                <select
+                  style={homeStyles.selectInput}
+                  onChange={(e) =>
+                    setKey1(e.target.value as keyof ScrappedLeek)
+                  }
+                >
+                  {availableKeys
+                    .filter(
+                      (key) =>
+                        key !== key2 && (plotMode == "3D" ? key !== key3 : true)
+                    )
+                    .map((key) => (
+                      <option key={key} value={key} selected={key === key1}>
+                        {key}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
               >
-                {availableKeys
-                  .filter(
-                    (key) =>
-                      key !== key1 && (plotMode == "3D" ? key !== key3 : true)
-                  )
-                  .map((key) => (
-                    <option key={key} value={key} selected={key === key2}>
-                      {key}
-                    </option>
-                  ))}
-              </select>
+                <span style={{ fontSize: "14px", fontWeight: "600" }}>Y:</span>
+                <select
+                  style={homeStyles.selectInput}
+                  onChange={(e) =>
+                    setKey2(e.target.value as keyof ScrappedLeek)
+                  }
+                >
+                  {availableKeys
+                    .filter(
+                      (key) =>
+                        key !== key1 && (plotMode == "3D" ? key !== key3 : true)
+                    )
+                    .map((key) => (
+                      <option key={key} value={key} selected={key === key2}>
+                        {key}
+                      </option>
+                    ))}
+                </select>
+              </div>
               {plotMode === "3D" && (
-                <>
-                  <h2>Z</h2>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                >
+                  <span style={{ fontSize: "14px", fontWeight: "600" }}>
+                    Z:
+                  </span>
                   <select
                     style={homeStyles.selectInput}
                     onChange={(e) =>
@@ -169,24 +202,27 @@ export default function Home() {
                         </option>
                       ))}
                   </select>
-                </>
+                </div>
               )}
             </div>
-            <h2>Color</h2>
-            <select
-              style={homeStyles.selectInput}
-              onChange={(e) => setSelectedColorScale(e.target.value)}
-            >
-              {COLOR_SCALES.map((key) => (
-                <option
-                  key={key}
-                  value={key}
-                  selected={key === selectedColorScale}
-                >
-                  {key}
-                </option>
-              ))}
-            </select>
+
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <h3 style={homeStyles.label}>Color Scale</h3>
+              <select
+                style={homeStyles.selectInput}
+                onChange={(e) => setSelectedColorScale(e.target.value)}
+              >
+                {COLOR_SCALES.map((key) => (
+                  <option
+                    key={key}
+                    value={key}
+                    selected={key === selectedColorScale}
+                  >
+                    {key}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div style={homeStyles.plotContainer}>
