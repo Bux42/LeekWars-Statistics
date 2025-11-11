@@ -1,0 +1,30 @@
+export interface ScrappedLeek {
+  leek_id: number;
+  leek_name: string;
+  talent: number;
+  lines_of_code: number;
+  xp: number;
+  level: number;
+  total_life: number;
+  total_strength: number;
+  total_wisdom: number;
+  total_agility: number;
+  total_resistance: number;
+  total_science: number;
+  total_magic: number;
+  total_frequency: number;
+  total_cores: number;
+  total_ram: number;
+  total_tp: number;
+  total_mp: number;
+  victories: number;
+  defeats: number;
+  draws: number;
+  ratio: number;
+  weapons: number[];
+  chips: number[];
+  components: number[];
+  xp_blocked: boolean;
+  ranking: number;
+  in_garden: boolean;
+}
