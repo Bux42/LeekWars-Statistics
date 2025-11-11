@@ -27,4 +27,5 @@ export interface ScrappedLeek {
   xp_blocked: boolean;
   ranking: number;
   in_garden: boolean;
+  focused?: boolean;
 }

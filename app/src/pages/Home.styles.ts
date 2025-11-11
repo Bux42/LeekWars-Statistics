@@ -4,6 +4,11 @@ export interface IHomeStyles {
   container: CSSProperties;
   main: CSSProperties;
   plotContainer: CSSProperties;
+  searchInput: CSSProperties;
+  selectInput: CSSProperties;
+  modeButtonsContainer: CSSProperties;
+  modeButton: CSSProperties;
+  topMenuContainer: CSSProperties;
 }
 
 export const homeStyles: IHomeStyles = {
@@ -17,8 +22,8 @@ export const homeStyles: IHomeStyles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "#333333",
-    color: "#dadadaff",
+    backgroundColor: "white",
+    color: "#333333",
     textAlign: "center",
   },
   main: {
@@ -30,5 +35,40 @@ export const homeStyles: IHomeStyles = {
   plotContainer: {
     flex: 1,
     minHeight: 0,
+  },
+  searchInput: {
+    padding: "12px 16px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    margin: "16px",
+    width: "calc(100% - 64px)",
+    maxWidth: "200px",
+  },
+  selectInput: {
+    padding: "12px 16px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    margin: "16px",
+    width: "calc(100% - 64px)",
+    maxWidth: "150px",
+  },
+  modeButtonsContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    margin: "16px",
+  },
+  modeButton: {
+    padding: "8px 16px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    backgroundColor: "#f0f0f0",
+    cursor: "pointer",
+  },
+  topMenuContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    margin: "16px",
   },
 };

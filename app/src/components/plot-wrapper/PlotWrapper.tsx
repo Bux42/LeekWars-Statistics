@@ -7,10 +7,8 @@ interface PlotWrapperProps {
 }
 
 export function PlotWrapper({ children }: PlotWrapperProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null!);
   const size = useSize(containerRef);
-
-  console.log("PlotWrapper size:", size, size.width, size.height);
 
   const validSize = useMemo(() => {
     return (

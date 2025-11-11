@@ -1,22 +1,20 @@
 import dynamic from "next/dynamic";
-import { PointsCluster3DProps } from "./PointsCluster3D.types";
+import { PointsCluster2DProps } from "./PointsCluster2D.types";
 import { normalizeLog, findMin, findMax } from "@/utils/MathHelpers";
 import { useRef } from "react";
 
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
-export function PointsCluster3D(props: PointsCluster3DProps) {
-  const { leeks, key1, key2, key3 } = props;
+export function PointsCluster2D(props: PointsCluster2DProps) {
+  const { leeks, key1, key2, colorKey } = props;
   const { width, height } = props;
   const { colorScale } = props;
 
   const xData = leeks.map((leek) => leek[key1] as number);
   const yData = leeks.map((leek) => leek[key2] as number);
-  const zData = leeks.map((leek) => leek[key3] as number);
 
   const summedColorValues = leeks.map(
-    (leek) =>
-      (leek[key1] as number) + (leek[key2] as number) + (leek[key3] as number)
+    (leek) => (leek[key1] as number) + (leek[key2] as number)
   );
 
   // Normalize color values between 0 and 1 using log scale
@@ -66,24 +64,20 @@ export function PointsCluster3D(props: PointsCluster3DProps) {
         {
           x: xData,
           y: yData,
-          z: zData,
-          type: "scatter3d",
+          type: "scatter",
           mode: "markers",
           marker: {
             size: sizes,
             color: normalizedColors,
             colorscale: colorScale,
-            line: {
-              width: 0,
-            },
+            line: { width: 0.5, color: "rgba(0,0,0,1)" },
           },
           customdata: customData,
-          name: `${String(key1)} vs ${String(key2)} vs ${String(key3)}`,
+          name: `${String(key1)} vs ${String(key2)}`,
           hovertemplate:
             "<b>%{customdata[0]}</b><br>" +
             `${String(key1)}: %{x}<br>` +
             `${String(key2)}: %{y}<br>` +
-            `${String(key3)}: %{z}<br>` +
             "<i>Double-click to open profile</i>" +
             "<extra></extra>",
         },
@@ -93,11 +87,8 @@ export function PointsCluster3D(props: PointsCluster3DProps) {
         paper_bgcolor: "transparent",
         width: width,
         height: height,
-        scene: {
-          xaxis: { title: { text: String(key1) } },
-          yaxis: { title: { text: String(key2) } },
-          zaxis: { title: { text: String(key3) } },
-        },
+        xaxis: { title: { text: String(key1) } },
+        yaxis: { title: { text: String(key2) } },
         showlegend: true,
         legend: {
           x: 1,
