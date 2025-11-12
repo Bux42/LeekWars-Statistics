@@ -103,3 +103,7 @@ This project is open source and available under the MIT License.
 ---
 
 Made with 💜 by [Bux42](https://github.com/Bux42)
+
+## Discord
+
+Join the **Leek Wars Tools** [Discord](https://discord.gg/Py6EaDhQE5)
